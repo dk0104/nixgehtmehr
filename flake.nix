@@ -1,8 +1,15 @@
 {
-  description = "A very basic flake";
+  description = "Nix geht mehr";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+
+    # NixPkgs
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+
+    # NixPkgs Unstable
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    #Snowfall Lib
     snowfall-lib = {
      url = "github:snowfallorg/lib";
      inputs.nixpkgs.follows = "nixpkgs";
@@ -10,6 +17,10 @@
 
   };
 
-  outputs = inputs: {}
+  outputs = inputs: 
+    inputs.snowfall-lib.mkFlake {
+      inherit inputs;
+      src = ./.;
+    };
 
 }
