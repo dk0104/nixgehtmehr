@@ -1,3 +1,9 @@
+{ 
+  config,
+  lib, 
+  namespace,
+  ...
+}:
 {
   disko.devices = {
     disk = {

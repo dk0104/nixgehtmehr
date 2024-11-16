@@ -6,7 +6,7 @@
   namespace,
   ...
 }:
-with lib
+with lib;
 with lib.${namespace};
 let 
   cfg = config.${namespace}.arechetypes.workstation;
@@ -19,7 +19,9 @@ in
    config = mkIf cfg.enable {
      nixgehtmehr = {
         suites = {
-         common = enabled
+         common = enabled;
+         desktop = enabled;
+         development = enabled;
         };
      };
    };

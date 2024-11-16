@@ -5,7 +5,6 @@ with lib.${namespace};
   imports = 
     [
       ./hardware-configuration.nix
-      "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
       ./disks.nix
     ];
 
@@ -24,13 +23,14 @@ with lib.${namespace};
     hostName = "schuhbox";
     hostId =  "00eb81e7";
     useDHCP = lib.mkDefault true;
-  }
+  };
   
   # Hardware
   hardware = {
    opengl.enable = true;
    bluetooth.enable = true;
   };
+
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
@@ -40,9 +40,6 @@ with lib.${namespace};
       workstation = enabled;
     };
    
-    desktop.gnome = {
-      monitors = ./monitors.xml;
-    };
   };
 
   # Select internationalisation properties.
