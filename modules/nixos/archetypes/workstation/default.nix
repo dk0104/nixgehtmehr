@@ -21,7 +21,6 @@ in
         suites = {
          common = enabled;
          desktop = enabled;
-         development = enabled;
         };
      };
    };

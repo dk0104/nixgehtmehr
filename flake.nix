@@ -5,12 +5,20 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     
-    disko = {
-      url = "github:nix-community/disko/latest";
+    # Lix
+    lix = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
+    };   
 
+    # Hardware Configuration
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
+    # Comma
+    comma.url = "github:nix-community/comma";
+    comma.inputs.nixpkgs.follows = "unstable";
+
+    # home-manager
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -57,7 +65,7 @@
           ];
         };
 
-	systems.modules.nixos = with inputs; [
+	     systems.modules.nixos = with inputs; [
           home-manager.nixosModules.home-manager
         ];
 

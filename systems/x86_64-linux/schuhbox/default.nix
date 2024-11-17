@@ -4,8 +4,7 @@ with lib.${namespace};
 {
   imports = 
     [
-      ./hardware-configuration.nix
-      ./disks.nix
+      ./hardware.nix
     ];
 
   # Boot loader
@@ -17,20 +16,6 @@ with lib.${namespace};
   # Set your time zone.
   time.timeZone = "Europe/Samara";
 
-  # Networking
-  networking = {
-    networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-    hostName = "schuhbox";
-    hostId =  "00eb81e7";
-    useDHCP = lib.mkDefault true;
-  };
-  
-  # Hardware
-  hardware = {
-   opengl.enable = true;
-   bluetooth.enable = true;
-  };
-
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
@@ -39,7 +24,6 @@ with lib.${namespace};
     archetypes = {
       workstation = enabled;
     };
-   
   };
 
   # Select internationalisation properties.
