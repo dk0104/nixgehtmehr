@@ -13,10 +13,82 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/3133d4d4-ba2b-4b19-bd01-4ed695386517";
+
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/826bd990-1e2a-424d-a579-ea69e95048a8";
+      fsType = "btrfs";
+      options = [ "subvol=root" 
+        "rw"
+        "noatime"
+        "ssd"
+        "compress=zstd"
+       ];
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/826bd990-1e2a-424d-a579-ea69e95048a8";
+      fsType = "btrfs";
+      options = [ "subvol=home"
+        "rw"
+        "noatime"
+        "compress=zstd"
+        "ssd"
+        ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/826bd990-1e2a-424d-a579-ea69e95048a8";
+      fsType = "btrfs";
+      options = [ "subvol=nix" 
+        "rw"
+        "noatime"
+        "ssd"
+        "compress=zstd"
+      ];
+    };
+
+  fileSystems."/persist" =
+    { device = "/dev/disk/by-uuid/826bd990-1e2a-424d-a579-ea69e95048a8";
+      fsType = "btrfs";
+      options = [ "subvol=persist" 
+        "rw"
+        "noatime"
+        "ssd"
+        "compress=zstd"
+      ];
+    };
+
+  fileSystems."/var/log" =
+    { device = "/dev/disk/by-uuid/826bd990-1e2a-424d-a579-ea69e95048a8";
+      fsType = "btrfs";
+      options = [ "subvol=log" 
+        "rw"
+        "noatime"
+        "ssd"
+        "compress=zstd"
+     ];
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/49B3-D875";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
+    };
+
+  swapDevices = [ ];
+
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking = {
+    useDHCP = lib.mkDefault true;
+    hostId = "78c1c644";
+  };
+  hardware.opengl.enable=true;
+  hardware.bluetooth.enable=true;
+
   # networking.interfaces.enp7s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp6s0.useDHCP = lib.mkDefault true;
 
