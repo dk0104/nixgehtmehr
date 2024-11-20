@@ -7,7 +7,6 @@
     kernelPackages = pkgs.linuxPackages_cachyos;
 
     kernelModules = [
-      "amdgpu"
       "kvm-amd"
     ];
 
@@ -28,7 +27,7 @@
       ];
 
       kernelModules = [
-        "amdgpu"
+        "kvm-amd"
       ];
     };
   };
