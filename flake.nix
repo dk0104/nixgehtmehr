@@ -1,0 +1,137 @@
+{
+  description = "Nix geht mehr";
+
+  inputs = {
+
+    master = {
+      url = "github:NixOS/nixpkgs/master";
+    };
+
+    unstable = {
+      url = "github:NixOS/nixpkgs/nixos-unstable";
+    };
+
+    # Latest stable
+    stable = {
+      url = "github:NixOS/nixpkgs/nixos-24.05";
+    };
+
+    # Current nixpkgs branch
+    nixpkgs = {
+      follows = "unstable";
+    };
+
+    # NixOS community
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    impermanence = {
+      url = "github:/nix-community/impermanence";
+    };
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    stylix = {
+      url = "github:danth/stylix";
+    };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+    };
+
+    chaotic = {
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    };
+
+    nix-topology = {
+      url = "github:oddlama/nix-topology";
+    };
+
+    nur = {
+      url = "github:nix-community/NUR";
+    };
+
+    # MacOS configuration
+    darwin = {
+      url = "github:LnL7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Hyprland ecosystem
+    hyprland = {
+      url = "git+https://github.com/hyprwm/Hyprland?submodules=1&rev=c5feee1e357f3c3c59ebe406630601c627807963";
+    };
+
+    xdghypr = {
+      url = "github:hyprwm/xdg-desktop-portal-hyprland/v1.3.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Unoficial users flakes
+    yandex-music = {
+      url = "github:cucumber-sp/yandex-music-linux";
+    };
+
+      lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.3.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Zsh plugins
+    powerlevel10k = {
+      url = "github:romkatv/powerlevel10k";
+      flake = false;
+    };
+
+    zsh-autosuggestions = {
+      url = "github:zsh-users/zsh-autosuggestions";
+      flake = false;
+    };
+
+    zsh-syntax-highlighting = {
+      url = "github:zsh-users/zsh-syntax-highlighting";
+      flake = false;
+    };
+
+    fzf-zsh-completions = {
+      url = "github:chitoku-k/fzf-zsh-completions";
+      flake = false;
+    };
+
+    zsh-history-substring-search = {
+      url = "github:zsh-users/zsh-history-substring-search";
+      flake = false;
+    };
+
+    zsh-auto-notify = {
+      url = "github:MichaelAquilina/zsh-auto-notify";
+      flake = false;
+    };
+
+  };
+
+};
+
+outputs = {self, flake-parts, ... } @ inputs:
+
+let
+  host = import ./host.nix;
+  libx = import ./lib {inherit self inputs;};
+in flake-parts.lib.mkFlake {inherit inputs;}{
+  systems = libx.forAllSystems;
+  imports = [ ./parts ];
+  flake = {
+
+   # NixOs Host configurations
+   nixosCounfigurations = libx.genNixos hosts.nixos;
+
+   # MacOs Host configurations
+   darwinConfigurations = libx.ginDarwin hosts.darwin;
+
+  };
+}
