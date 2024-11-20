@@ -77,7 +77,7 @@
       url = "github:cucumber-sp/yandex-music-linux";
     };
 
-      lanzaboote = {
+    lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.3.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -115,12 +115,11 @@
 
   };
 
-};
 
 outputs = {self, flake-parts, ... } @ inputs:
 
 let
-  host = import ./host.nix;
+  hosts = import ./hosts.nix;
   libx = import ./lib {inherit self inputs;};
 in flake-parts.lib.mkFlake {inherit inputs;}{
   systems = libx.forAllSystems;
@@ -131,7 +130,8 @@ in flake-parts.lib.mkFlake {inherit inputs;}{
    nixosCounfigurations = libx.genNixos hosts.nixos;
 
    # MacOs Host configurations
-   darwinConfigurations = libx.ginDarwin hosts.darwin;
+   darwinConfigurations = libx.genDarwin hosts.darwin;
 
   };
+};
 }
