@@ -11,111 +11,73 @@ _:
     before = [ "sysroot.mount" ];
 
     script = ''
-      vgchange -ay pool
-      mkdir -p /btrfs_tmp
-      mount /dev/pool/root /btrfs_tmp
-
-      if [[ -e /btrfs_tmp/root ]]; then
-          mkdir -p /btrfs_tmp/old_roots
-          timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/root)" "+%Y-%m-%-d_%H:%M:%S")
-          mv /btrfs_tmp/root "/btrfs_tmp/old_roots/$timestamp"
-      fi
-
-      delete_subvolume_recursively() {
-          IFS=$'\n'
-          for i in $(btrfs subvolume list -o "$1" | cut -f 9- -d ' '); do
-              delete_subvolume_recursively "/btrfs_tmp/$i"
-          done
-          btrfs subvolume delete "$1"
-      }
-
-      for i in $(find /btrfs_tmp/old_roots/ -maxdepth 1 -mtime +30); do
-          delete_subvolume_recursively "$i"
-      done
-
-      btrfs subvolume create /btrfs_tmp/root
-      umount /btrfs_tmp
+      mkdir /mnt
+      mount -t btrfs /dev/mapper/enc /mnt 
+      btrfs subvolume delete /mnt/root
+      btrfs subvolume snapshot /mnt/root-blank/ mnt/root
     '';
   };
 
-  fileSystems = {
-    "/persist" = {
+ fileSystems."/" =
+    { device = "/dev/disk/by-uuid/826bd990-1e2a-424d-a579-ea69e95048a8";
+      fsType = "btrfs";
+      options = [ "subvol=root" 
+        "rw"
+        "noatime"
+        "ssd"
+        "compress=zstd"
+       ];
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/826bd990-1e2a-424d-a579-ea69e95048a8";
+      fsType = "btrfs";
+      options = [ "subvol=home"
+        "rw"
+        "noatime"
+        "compress=zstd"
+        "ssd"
+        ];
+    };
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/826bd990-1e2a-424d-a579-ea69e95048a8";
+      fsType = "btrfs";
+      options = [ "subvol=nix" 
+        "rw"
+        "noatime"
+        "ssd"
+        "compress=zstd"
+      ];
+    };
+
+  fileSystems."/persist" =
+    { device = "/dev/disk/by-uuid/826bd990-1e2a-424d-a579-ea69e95048a8";
+      fsType = "btrfs";
+      options = [ "subvol=persist" 
+        "rw"
+        "noatime"
+        "ssd"
+        "compress=zstd"
+      ];
       neededForBoot = true;
     };
-  };
 
-  disko.devices = {
-    disk = {
-      main = {
-        type = "disk";
-        device = "/dev/disk/by-id/nvme-Samsung_SSD_980_PRO_1TB_S5GXNX1T331237Z";
-
-        content = {
-          type = "gpt";
-
-          partitions = {
-            esp = {
-              size = "5G";
-              type = "EF00";
-
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot";
-
-                mountOptions = [ "defaults" "umask=0077" ];
-              };
-            };
-
-            luks = {
-              size = "100%";
-
-              content = {
-                type = "luks";
-                name = "crypted";
-
-                content = {
-                  type = "lvm_pv";
-                  vg   = "pool";
-                };
-              };
-            };
-          };
-        };
-      };
+  fileSystems."/var/log" =
+    { device = "/dev/disk/by-uuid/826bd990-1e2a-424d-a579-ea69e95048a8";
+      fsType = "btrfs";
+      options = [ "subvol=log" 
+        "rw"
+        "noatime"
+        "ssd"
+        "compress=zstd"
+     ];
     };
 
-    lvm_vg = {
-      pool = {
-        type = "lvm_vg";
-
-        lvs = {
-          root = {
-            size = "100%FREE";
-
-            content = {
-              type = "btrfs";
-              extraArgs = [ "-f" ];
-
-              subvolumes = {
-                "/root" = {
-                  mountpoint = "/";
-                };
-
-                "/persist" = {
-                  mountpoint   = "/persist";
-                  mountOptions = [ "compress=zstd" "subvol=persist" "noatime" ];
-                };
-
-                "/nix" = {
-                  mountpoint   = "/nix";
-                  mountOptions = [ "compress=zstd" "subvol=nix" "noatime" ];
-                };
-              };
-            };
-          };
-        };
-      };
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/49B3-D875";
+      fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
     };
-  };
-}
+
+  swapDevices = [ ];

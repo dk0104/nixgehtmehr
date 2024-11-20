@@ -1,16 +1,11 @@
-{ config, ... }:
+{ lib
+, machineModulesPath
+, ...
+}:
 
 {
-  module = {
-    boot.enable       = true;
-    network.enable    = true;
-    users.enable      = true;
-    timedate.enable   = true;
-  }
-
-  security = {
-    enable            = true;
-    enableBootOptions = true;
-  };
-
+  imports = builtins.filter (module: lib.pathIsDirectory module) (
+    map (module: "${machineModulesPath}/${module}") (builtins.attrNames (builtins.readDir machineModulesPath))
+  );
 }
+
