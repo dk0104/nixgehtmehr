@@ -17,9 +17,9 @@ let
     , wm ? null
     }:
     let
-      machineConfigurationPath      = "${self}/system/machines/${machineDir}";
+      machineConfigurationPath      = "${self}/system/machine/${machineDir}";
       machineConfigurationPathExist = builtins.pathExists machineConfigurationPath;
-      machineModulesPath            = "${self}/system/machines/${machineDir}/modules";
+      machineModulesPath            = "${self}/system/machine/${machineDir}/modules";
       machineModulesPathExist       = builtins.pathExists machineModulesPath;
 
       swayEnable     = wm == "sway";
