@@ -127,7 +127,7 @@ in flake-parts.lib.mkFlake {inherit inputs;}{
   flake = {
 
    # NixOs Host configurations
-   nixosCounfigurations = libx.genNixos hosts.nixos;
+   nixosConfigurations = libx.genNixos hosts.nixos;
 
    # MacOs Host configurations
    darwinConfigurations = libx.genDarwin hosts.darwin;
