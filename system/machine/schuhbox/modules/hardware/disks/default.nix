@@ -1,6 +1,8 @@
 _:
 
 {
+  boot.initrd.luks.devices."enc".device = "/dev/disk/by-uuid/3133d4d4-ba2b-4b19-bd01-4ed695386517";
+
   # For impermanence
   boot.initrd.systemd.services.rollback = {
     description = "Rollback BTRFS root subvolume to a pristine state";
