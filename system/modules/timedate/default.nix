@@ -8,9 +8,9 @@ in
     module.timedate.enable = mkEnableOption "Enables timedate";
   };
 
-  config = mkIf cfg.enble {
+  config = mkIf cfg.enable {
     time.timeZone = "Europe/Samara";
-    service.chrony.enable = true;
+#    services.chrony.enable = true;
   };
 
 }

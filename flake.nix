@@ -76,6 +76,10 @@
     yandex-music = {
       url = "github:cucumber-sp/yandex-music-linux";
     };
+ 
+    any-nix-shell = {
+      url = "github:TheMaxMur/any-nix-shell";
+    };
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.3.0";

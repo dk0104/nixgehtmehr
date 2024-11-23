@@ -29,7 +29,7 @@ in {
         ${username} = {
           uid                = 1000;
           home               = "/home/${username}";
-          shell              = pkgs.fish;
+          shell              = pkgs.zsh;
           group              = "${username}";
           createHome         = true;
           description        = "${username}";

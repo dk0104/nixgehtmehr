@@ -63,21 +63,9 @@ _:
       neededForBoot = true;
     };
 
-  fileSystems."/var/log" =
-    { device = "/dev/disk/by-uuid/826bd990-1e2a-424d-a579-ea69e95048a8";
-      fsType = "btrfs";
-      options = [ "subvol=log" 
-        "rw"
-        "noatime"
-        "ssd"
-        "compress=zstd"
-     ];
-    };
-
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/49B3-D875";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
-
-  swapDevices = [ ];
+}

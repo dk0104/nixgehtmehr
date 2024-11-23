@@ -58,8 +58,6 @@ in {
 
       # Chats
       telegram-desktop
-      fluffychat
-      vesktop
 
       # Office
       onlyoffice-bin

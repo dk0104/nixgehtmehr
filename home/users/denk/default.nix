@@ -11,7 +11,6 @@
 
   stylix.targets = {
     vscode.enable = false;
-    helix.enable = false;
   };
 
   module = {
@@ -26,7 +25,7 @@
     librewolf.enable   = isLinux && isWorkstation;
     thunderbird.enable = isLinux && isWorkstation;
     foot.enable        = isLinux && isWorkstation;
-    ssh.enable         = isLinux && isWorkstation;
+#    ssh.enable         = isLinux && isWorkstation;
 
     hyprland.enable = hyprlandEnable && isLinux && isWorkstation;
     hyprlock.enable = hyprlandEnable && isLinux && isWorkstation;
@@ -48,12 +47,9 @@
     ripgrep.enable        = true;
     lazygit.enable        = true;
     neofetch.enable       = true;
-    fastfetch.enable      = true;
     nvim.enable           = true;
-    helix.enable          = true;
     password-store.enable = true;
     zsh.enable            = true;
-    fish.enable           = true;
     zoxide.enable         = true;
     yazi.enable           = true;
 
