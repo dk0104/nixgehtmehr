@@ -33,6 +33,12 @@
        inputs.nixpkgs.follows = "nixpkgs";
     };
 
+     # Run unpatched dynamically compiled binaries
+    nix-ld = {
+      url = "github:Mic92/nix-ld";
+      inputs.nixpkgs.follows = "unstable";
+    };
+
     # home-manager
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
