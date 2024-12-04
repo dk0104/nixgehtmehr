@@ -19,7 +19,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ swappy ];
 
-    nixgehtmehr.home.configFile."swappy/config".source = ./config;
-    nixgehtmehr.home.file."Pictures/screenshots/.keep".text = "";
+    nixgehtmehr.user.home.configFile."swappy/config".source = ./config;
+    nixgehtmehr.user.home.file."Pictures/screenshots/.keep".text = "";
   };
 }

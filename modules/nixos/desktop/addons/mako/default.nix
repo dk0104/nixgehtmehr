@@ -49,6 +49,6 @@ in
       };
     };
 
-    nixgehtmehr.home.configFile."mako/config".source = ./config;
+    nixgehtmehr.user.home.configFile."mako/config".source = ./config;
   };
 }

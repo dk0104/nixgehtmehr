@@ -19,6 +19,6 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ rofi ];
 
-    nixgehtmehr.home.configFile."rofi/config.rasi".source = ./config.rasi;
+    nixgehtmehr.user.home.configFile."rofi/config.rasi".source = ./config.rasi;
   };
 }

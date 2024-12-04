@@ -39,7 +39,7 @@ in
       XCURSOR_THEME = cfg.cursor.name;
     };
 
-    nixgehtmehr.home.extraOptions = {
+    nixgehtmehr.user.home.extraOptions = {
       gtk = {
         enable = true;
 

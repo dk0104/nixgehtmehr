@@ -19,7 +19,7 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [ waybar ];
 
-    nixgehtmehr.home.configFile."waybar/config".source = ./config;
-    nixgehtmehr.home.configFile."waybar/style.css".source = ./style.css;
+    nixgehtmehr.user.home.configFile."waybar/config".source = ./config;
+    nixgehtmehr.user.home.configFile."waybar/style.css".source = ./style.css;
   };
 }

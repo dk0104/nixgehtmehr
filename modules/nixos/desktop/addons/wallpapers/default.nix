@@ -18,7 +18,7 @@ in
   };
 
   config = {
-    nixgehtmehr.home.file = lib.foldl (
+    nixgehtmehr.user.home.file = lib.foldl (
       acc: name:
       let
         wallpaper = wallpapers.${name};

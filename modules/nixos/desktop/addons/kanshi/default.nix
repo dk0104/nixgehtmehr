@@ -19,7 +19,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    nixgehtmehr.home.configFile."kanshi/config".source = ./config;
+    nixgehtmehr.user.home.configFile."kanshi/config".source = ./config;
 
     environment.systemPackages = with pkgs; [ kanshi ];
 

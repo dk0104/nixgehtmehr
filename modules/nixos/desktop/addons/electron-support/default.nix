@@ -17,7 +17,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    nixgehtmehr.home.configFile."electron-flags.conf".source = ./electron-flags.conf;
+    nixgehtmehr.user.home.configFile."electron-flags.conf".source = ./electron-flags.conf;
 
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";

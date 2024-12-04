@@ -22,6 +22,6 @@ in
       pkg = pkgs.foot;
     };
 
-    nixgehtmehr.home.configFile."foot/foot.ini".source = ./foot.ini;
+    nixgehtmehr.user.home.configFile."foot/foot.ini".source = ./foot.ini;
   };
 }
