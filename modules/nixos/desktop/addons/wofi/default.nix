@@ -26,7 +26,7 @@ in
     # css -> .config/wofi/style.css
     # colors -> $XDG_CACHE_HOME/wal/colors
     # nixgehtmehr.home.configFile."foot/foot.ini".source = ./foot.ini;
-    nixgehtmehr.home.configFile."wofi/config".source = ./config;
-    nixgehtmehr.home.configFile."wofi/style.css".source = ./style.css;
+    nixgehtmehr.user.home.configFile."wofi/config".source = ./config;
+    nixgehtmehr.user.home.configFile."wofi/style.css".source = ./style.css;
   };
 }
