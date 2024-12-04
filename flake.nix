@@ -41,9 +41,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     }
 
-    # Hardware
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-
     # WSL
     # nixos-wsl = {
     #   url = "github:nix-community/nixos-wsl";
