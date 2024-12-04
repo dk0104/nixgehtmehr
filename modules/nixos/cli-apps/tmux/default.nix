@@ -7,7 +7,7 @@
 }:
 let 
   inherit (lib) mkIf;
-  inherit (ifb.${namespace}) mkBoolOpt;
+  inherit (lib.${namespace}) mkBoolOpt;
 
   cfg = config.${namespace}.cli-apps.tmux;
   configFiles = lib.snowfall.fs.get-files ./config;
