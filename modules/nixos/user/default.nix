@@ -45,12 +45,15 @@ in
     fullName = mkOpt str "Denis Keksel" "The full name of the user.";
     email = mkOpt str "kexsel@yandex.ru" "The email of the user.";
     initialPassword =
-      mkOpt str "password"
+      mkOpt str "Ppfwq"
         "The initial password to use when the user is first created.";
     icon = mkOpt (nullOr package) defaultIcon "The profile picture to use for the user.";
     prompt-init = mkBoolOpt true "Whether or not to show an initial message when opening a new shell.";
     extraGroups = mkOpt (listOf str) [ ] "Groups for the user to be assigned.";
     extraOptions = mkOpt attrs { } (mdDoc "Extra options passed to `users.users.<name>`.");
+    home.file = mkOpt types.attrs { } "A set of files to be managed by home-manager `home.file`";
+    home.configFile = mkOpt attrs { } "An set of files to be managed by home-manager xdg.configFile";
+    home.extraOptions = mkOpt attrs { } "Extra options passed to home-manager";
   };
 
   config = {
@@ -67,50 +70,6 @@ in
       histFile = "$XDG_CACHE_HOME/zsh.history";
     };
 
-    nixgehtmehr.home = {
-      file = {
-        "Desktop/.keep".text = "";
-        "Documents/.keep".text = "";
-        "Downloads/.keep".text = "";
-        "Music/.keep".text = "";
-        "Pictures/.keep".text = "";
-        "Videos/.keep".text = "";
-        "work/.keep".text = "";
-        ".face".source = cfg.icon;
-        "Pictures/${cfg.icon.fileName or (builtins.baseNameOf cfg.icon)}".source = cfg.icon;
-      };
-
-      extraOptions = {
-        home.shellAliases = {
-          lc = "${pkgs.colorls}/bin/colorls --sd";
-          lcg = "lc --gs";
-          lcl = "lc -1";
-          lclg = "lc -1 --gs";
-          lcu = "${pkgs.colorls}/bin/colorls -U";
-          lclu = "${pkgs.colorls}/bin/colorls -U -1";
-        };
-
-        programs = {
-          starship = {
-            enable = true;
-            settings = {
-              character = {
-                success_symbol = "[➜](bold green)";
-                error_symbol = "[✗](bold red) ";
-                vicmd_symbol = "[](bold blue) ";
-              };
-            };
-          };
-
-          zsh = {
-            enable = true;
-            enableCompletion = true;
-            syntaxHighlighting.enable = true;
-            autosuggestion.enable = true;
-          };
-        };
-      };
-    };
 
     users.users.${cfg.name} = {
       isNormalUser = true;
@@ -119,16 +78,21 @@ in
 
       home = "/home/${cfg.name}";
       group = "users";
-
       shell = pkgs.zsh;
-
-      # Arbitrary user ID to use for the user. Since I only
-      # have a single user on my machines this won't ever collide.
-      # However, if you add multiple users you'll need to change this
-      # so each user has their own unique uid (or leave it out for the
-      # system to select).
       uid = 1000;
 
-    } // cfg.extraOptions;
-  };
+    home-manager = {
+      useGlobalPkgs = true;
+      backupFileExtension = "backup";
+    };
+    snowfallorg.users.${cfg.name} = {
+      home.config = {
+        home.stateVersion = config.system.stateVersion;
+        home.file = mkAliasDefinitions options.${namespace}.user.home.file;
+        xdg.enable = true;
+        xdg.configFile = mkAliasDefinitions options.${namespace}.user.home.configFile;
+      } // cfg.home.extraOptions;
+    };
+
+  } // cfg.extraOptions;
 }
