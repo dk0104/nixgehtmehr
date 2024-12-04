@@ -23,7 +23,6 @@ in
       };
 
       apps = {
-        firefox = enabled;
         vlc = enabled;
       };
     };
