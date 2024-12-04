@@ -32,7 +32,6 @@ in
       };
 
       tools = {
-        git = enabled;
         misc = enabled;
       };
 
