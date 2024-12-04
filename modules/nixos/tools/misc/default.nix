@@ -17,10 +17,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    nixgehtmehr.home.configFile."wgetrc".text = "";
-
     environment.systemPackages = with pkgs; [
       fzf
+      ripgrep
       killall
       unzip
       file
