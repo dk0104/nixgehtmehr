@@ -95,6 +95,6 @@ in
         } // cfg.home.extraOptions;
       };
 
-    }; // cfg.extraOptions;
+    };
   };
 }
