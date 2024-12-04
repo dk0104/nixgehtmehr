@@ -21,7 +21,7 @@ in
     services.xserver = {
       xkb = {
         layout = "us,us,ru";
-        variant = "colemak"
+        variant = "colemak";
         options = "grp:alt_shift_toggle,ctrl:nocaps";
       };
     };
