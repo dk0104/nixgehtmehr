@@ -23,7 +23,7 @@ in
       };
 
       cli-apps = {
-        tmux = enable;
+        tmux = enabled;
         flake = enabled;
       };
 
