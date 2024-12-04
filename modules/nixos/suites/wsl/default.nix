@@ -28,7 +28,6 @@ in
       };
 
       tools = {
-        git = enabled;
         misc = enabled;
         nix-ld = enabled;
         k8s = enabled;
