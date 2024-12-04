@@ -39,7 +39,7 @@
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
-    }
+    };
 
     # WSL
     # nixos-wsl = {
@@ -58,7 +58,7 @@
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
-    }
+    };
 
     #snowfall lib
     snowfall-lib = {
