@@ -14,8 +14,7 @@ in
 
   nixgehtmehr = {
     suites = {
-      WSL = enabled;
-      networking = enabled;
+      wsl = enabled;
     };
 
 
