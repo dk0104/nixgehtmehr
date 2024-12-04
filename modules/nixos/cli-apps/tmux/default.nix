@@ -41,10 +41,10 @@ let
 in 
 {
   options.${namespace}.cli-apps.tmux = {
-    enable = mkEnableOption "Tmux";
+    enable = mkBoolOpt false "Whether to enable Tmux";
   };
 
-  config = mkif cfg.enable {
+  config = mkIf cfg.enable {
     programs.tmux = {
         enable = true;
         aggressiveResize = true;
