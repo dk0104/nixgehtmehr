@@ -22,7 +22,7 @@ in
       };
 
       services = {
-        openssh = enabled;
+   #     openssh = enabled;
       };
 
       system = {
