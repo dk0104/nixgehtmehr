@@ -20,6 +20,12 @@
       inputs.nixpkgs.follows = "unstable";
     };
 
+    # WSL
+    nixos-wsl = {
+       url = "github:nix-community/NixOS-WSL/main";
+       inputs.nixpkgs.follows = "nixpkgs";
+    }
+
     # home-manager
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
@@ -39,10 +45,10 @@
     nixos-hardware.url = "github:nixos/nixos-hardware";
 
     # WSL
-    nixos-wsl = {
-      url = "github:nix-community/nixos-wsl";
-      inputs.nixpkgs.follows = "stablepkgs";
-    }
+    # nixos-wsl = {
+    #   url = "github:nix-community/nixos-wsl";
+    #   inputs.nixpkgs.follows = "stablepkgs";
+    # }
 
 
     # System Deployment
@@ -120,7 +126,7 @@
           impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
           nix-index-database.nixosModules.nix-index
-
+          nix-ld.nixosModules.nix-ld
         ];
 
         deploy = lib.mkDeploy { inherit (inputs) self; };

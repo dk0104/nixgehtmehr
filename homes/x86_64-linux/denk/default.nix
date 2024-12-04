@@ -12,7 +12,6 @@ with lib.${namespace};
     nixgehtmehr {
       cli-apps = {
         zsh = enabled;
-        neovim = enabled;
         home-manager = enabled;
       };
       
