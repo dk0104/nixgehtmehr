@@ -37,6 +37,7 @@ let
     { plugin = tmux-fzf;}
     { plugin = fingers;}
     { plugin = yank;}
+  ]
 in 
 {
   options.${namespace}.cli-apps.tmux = {
