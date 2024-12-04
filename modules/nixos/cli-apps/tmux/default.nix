@@ -60,11 +60,8 @@ in
         extraConfig = builtins.concatStringsSep "\n" (builtins.map lib.strings.fileContents configFiles);
 
         inherit plugins;
-
-      }
-
-  }
-
-};
+      };
+  };
+}
 
 
