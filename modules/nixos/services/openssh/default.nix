@@ -87,11 +87,5 @@ in
     '';
 
     nixgehtmehr.user.extraOptions.openssh.authorizedKeys.keys = cfg.authorizedKeys;
-
-    nixgehtmehr.home.extraOptions = {
-      programs.zsh.shellAliases = foldl (
-        aliases: system: aliases // { "ssh-${system}" = "ssh ${system} -t tmux a"; }
-      ) { } (builtins.attrNames other-hosts);
-    };
   };
 }
