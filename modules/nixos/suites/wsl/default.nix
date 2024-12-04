@@ -9,7 +9,7 @@ let
   cfg = config.${namespace}.suites.wsl;
 in
 {
-  options.${namespace}.suites.WSL = {
+  options.${namespace}.suites.wsl = {
     enable = mkBoolOpt false "Whether or not to enable a common WSL configuration";
   };
 
