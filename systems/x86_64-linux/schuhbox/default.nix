@@ -8,11 +8,7 @@ with lib.${namespace};
     ];
 
   # Boot loader
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.grub.device = "nodev"; # or "nodev" for efi only
-  
+
   # Set your time zone.
   time.timeZone = "Europe/Samara";
 

@@ -81,8 +81,7 @@ in
             trusted-public-keys = [
               cfg.default-substituter.key
             ] ++ (mapAttrsToList (name: value: value.key) cfg.extra-substituters);
-          }
-          // (lib.optionalAttrs config.${namespace}.tools.direnv.enable {
+          } // (lib.optionalAttrs config.${namespace}.tools.direnv.enable {
             # keep-outputs = true;
             # keep-derivations = true;
           });
