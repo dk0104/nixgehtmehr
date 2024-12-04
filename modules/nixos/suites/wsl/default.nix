@@ -17,14 +17,6 @@ in
     nixgehtmehr = {
       nix = enabled;
 
-      security = {
-        sudo = enabled;
-      };
-
-      services = {
-   #     openssh = enabled;
-      };
-
       system = {
         fonts = enabled;
         xkb = enabled;
