@@ -81,18 +81,20 @@ in
       shell = pkgs.zsh;
       uid = 1000;
 
-    home-manager = {
-      useGlobalPkgs = true;
-      backupFileExtension = "backup";
-    };
-    snowfallorg.users.${cfg.name} = {
-      home.config = {
-        home.stateVersion = config.system.stateVersion;
-        home.file = mkAliasDefinitions options.${namespace}.user.home.file;
-        xdg.enable = true;
-        xdg.configFile = mkAliasDefinitions options.${namespace}.user.home.configFile;
-      } // cfg.home.extraOptions;
-    };
+      home-manager = {
+        useGlobalPkgs = true;
+        backupFileExtension = "backup";
+      };
 
-  } // cfg.extraOptions;
+      snowfallorg.users.${cfg.name} = {
+        home.config = {
+          home.stateVersion = config.system.stateVersion;
+          home.file = mkAliasDefinitions options.${namespace}.user.home.file;
+          xdg.enable = true;
+          xdg.configFile = mkAliasDefinitions options.${namespace}.user.home.configFile;
+        } // cfg.home.extraOptions;
+      };
+
+    }; // cfg.extraOptions;
+  };
 }
