@@ -118,7 +118,7 @@
         };
 
 	     systems.modules.nixos = with inputs; [
-          stylix.nixosMoadules.stylix
+          stylix.nixosModules.stylix
           disko.nixosModules.disko
           impermanence.nixosModules.impermanence
           home-manager.nixosModules.home-manager
