@@ -137,6 +137,10 @@
           nix-ld.nixosModules.nix-ld
         ];
 
+        system.hosts.wsl.modules = with inputs; [
+          nixos-wls.nixosModules.default
+        ];
+
         deploy = lib.mkDeploy { inherit (inputs) self; };
 
         checks = builtins.mapAttrs
