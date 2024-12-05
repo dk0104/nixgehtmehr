@@ -48,11 +48,6 @@ in
           package = cfg.theme.pkg;
         };
 
-        cursorTheme = {
-          name = cfg.cursor.name;
-          package = cfg.cursor.pkg;
-        };
-
         iconTheme = {
           name = cfg.icon.name;
           package = cfg.icon.pkg;
