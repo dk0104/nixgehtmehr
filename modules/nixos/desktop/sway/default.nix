@@ -25,7 +25,7 @@ in
 
   config = mkIf cfg.enable {
     # Desktop additions
-    plusultra.desktop.addons = {
+    nixgehtmehr.desktop.addons = {
       gtk = enabled;
       foot = enabled;
       mako = enabled;
@@ -40,7 +40,7 @@ in
       electron-support = enabled;
     };
 
-    plusultra.home.configFile."sway/config".text = fileWithText substitutedConfig ''
+    nixgehtmehr.user.home.configFile."sway/config".text = fileWithText substitutedConfig ''
       #############################
       #░░░░░░░░░░░░░░░░░░░░░░░░░░░#
       #░░█▀▀░█░█░█▀▀░▀█▀░█▀▀░█▄█░░#
