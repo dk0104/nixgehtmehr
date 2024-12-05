@@ -17,7 +17,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    plusultra.home.extraOptions = {
+    nixgehtmehr.user.home.extraOptions = {
       programs.direnv = {
         enable = true;
         nix-direnv = enabled;
