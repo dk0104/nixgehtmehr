@@ -29,7 +29,6 @@ in
 
       tools = {
         misc = enabled;
-        nix-ld = enabled;
         k8s = enabled;
       };
     };

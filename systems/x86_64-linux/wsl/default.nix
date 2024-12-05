@@ -16,8 +16,6 @@ in
     suites = {
       wsl = enabled;
     };
-
-
   };
 
   system.stateVersion = "24.05";
